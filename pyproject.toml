@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "instagram-followers"
+version = "0.1.0"
+description = "Day 52 of 100 Days of Code: a Selenium bot that follows the followers of a target account on the Share-a-Naan mock service."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+dependencies = ["selenium>=4.20"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+instagram-followers = "instagram_followers.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
