@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-04 | Proposed | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | pending |
+| 2026-11-04 | Proposed | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | [2a2838f] |
 
 ---
 
@@ -59,3 +59,4 @@ Go — Every Mandatory criterion passes. Optional criterion 13 was fixed (pinned
 
 [MIL-002]: ../../milestones/mil-002-follower-bot.md
 [QC-PY-001]: ../../../framework/qc/code/qc-programming-python.md
+[2a2838f]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/052-instagram-followers/commit/2a2838fba36dd4d83c3bb1a4a12fc2d143c7d211
