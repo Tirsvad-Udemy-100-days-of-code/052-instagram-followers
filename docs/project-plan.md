@@ -11,8 +11,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-04 | Deprecated | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | pending |
-| 2026-11-04 | Accepted | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Accepted on RC-003 (Go)<br>Mode: autonomous, not independent | pending |
+| 2026-11-04 | Deprecated | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | [4cd695e] |
+| 2026-11-04 | Accepted | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Accepted on RC-003 (Go)<br>Mode: autonomous, not independent | [4cd695e] |
 
 ---
 
@@ -88,3 +88,4 @@ A No-Go on a phase stops the later phases until it is fixed and re-reviewed, and
 [MIL-002]: ./milestones/mil-002-follower-bot.md
 [MIL-003]: ./milestones/mil-003-readme-and-screenshots.md
 [MIL-004]: ./milestones/mil-004-wiki.md
+[4cd695e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/052-instagram-followers/commit/4cd695e8db91dd3f01f69e097cdf02098de2c144

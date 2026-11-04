@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-04 | Proposed | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | pending |
+| 2026-11-04 | Proposed | Jens Tirsvad Nielsen | S01 (AI as stand-in) | Initial version | [4cd695e] |
 
 ---
 
@@ -72,3 +72,4 @@ No design views (use case, domain model, design class diagram) exist: the projec
 [RC-006]: ./reviews/rc-006-mil-002.md
 [RC-007]: ./reviews/rc-007-mil-003.md
 [RC-008]: ./reviews/rc-008-mil-004.md
+[4cd695e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/052-instagram-followers/commit/4cd695e8db91dd3f01f69e097cdf02098de2c144
