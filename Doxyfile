@@ -1,0 +1,14 @@
+# Minimal Doxygen configuration. Generate the API docs with: doxygen Doxyfile
+PROJECT_NAME           = "Instagram Followers"
+PROJECT_BRIEF          = "Day 52: Selenium bot that follows the followers of a target account"
+OUTPUT_DIRECTORY       = docs/doxygen
+INPUT                  = src
+FILE_PATTERNS          = *.py
+RECURSIVE              = YES
+OPTIMIZE_OUTPUT_JAVA   = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = YES
