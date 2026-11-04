@@ -17,7 +17,7 @@ A Python Selenium bot from Day 52 of Udemy's "100 Days of Code: The Complete Pyt
 
 The assignment has five steps: get credentials, create the `InstaFollower` class, log in, find the followers of the target account and follow them. The code keeps the assignment's names (`InstaFollower`, `login`, `find_followers`, `follow`).
 
-- `src/instagram_followers/` holds the bot and `constants.py`.
+- `src/instagram_followers/` holds the bot in clean-architecture layers (`domain`, `application`, `infrastructure`, `presentation`) and `constants.py`.
 - `tests/` holds the pytest tests, which use a fake driver and need no browser or network.
 - `docs/` holds the project documents and the wiki (English, Danish and Bahasa Malaysia).
 
@@ -57,7 +57,7 @@ export INSTA_PASSWORD="your_password"
 ## ▶️ Run
 
 ```bash
-python -m instagram_followers.main
+python -m instagram_followers.presentation.main
 ```
 
 Run it sparingly and log out between test runs by hand.
