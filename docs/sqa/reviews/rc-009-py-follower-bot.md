@@ -36,7 +36,7 @@
 | 8 | Public modules, classes and functions have docstrings that say what, not how | Pass | Public modules, classes and functions carry Doxygen-style `##` comments (the Doxyfile reads them), as the Product Owner required. |
 | 9 | Logging uses `logging`, not `print`; no secrets or personal data in log output | Pass | No print or logging; credentials are hidden from repr and never logged. |
 | 10 | Classes and operations trace to the Design Class Diagram they implement; deviations are recorded | Pass | No design class diagram exists: [PP-001] models no use cases. The structure (Follower port, InstaFollower adapter, run_bot use case) is recorded here as the deviation. |
-| 11 | Tests exist for new behaviour, are named for the behaviour, and do not depend on order or the network | Pass | 16 tests in tests/unit and tests/integration use a fake driver, no network, injected sleep. |
+| 11 | Tests exist for new behaviour, are named for the behaviour, and do not depend on order or the network | Pass | 18 tests in tests/unit and tests/integration use a fake driver, no network, injected sleep. |
 | 12 | Type checker runs in strict mode without errors; `Any` is justified in a comment | Pass | `mypy --strict` clean; no `Any`. |
 | 13 | Dependencies are declared and pinned in the project's dependency file, none unused | Pass | Dependencies are declared and pinned in pyproject.toml (selenium, pytest, ruff, mypy). Fixed after the first draft of this review. |
 | 14 | Each piece of knowledge (a business rule, constant, format, validation or query) is defined in one place; code is merged only where it expresses the same knowledge, not where it merely looks alike | Pass | Meets the criterion; see src/instagram_followers. |
@@ -47,7 +47,7 @@
 
 ## Overall Verdict
 
-Go — Every Mandatory criterion passes. Optional criterion 13 was fixed (pinned versions).
+Go — Every Mandatory criterion passes. Optional criterion 13 was fixed (pinned versions). Re-checked after the locators and the account URL were corrected against the live mock on 2026-11-04 (18 tests, ruff and mypy --strict clean).
 
 ## Action Items
 

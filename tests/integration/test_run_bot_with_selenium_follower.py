@@ -20,7 +20,8 @@ def test_run_bot_drives_selenium_follower_through_all_steps(
             constants.PASSWORD_FIELD_ID: [FakeElement()],
             constants.SUBMIT_BUTTON_XPATH: [FakeElement()],
             constants.FOLLOWERS_LINK_XPATH: [FakeElement()],
-            constants.FOLLOWERS_MODAL_XPATH: [FakeElement(children=[button])],
+            constants.FOLLOWERS_MODAL_XPATH: [FakeElement()],
+            constants.FOLLOWERS_SCROLL_XPATH: [FakeElement(children=[button])],
         }
     )
     fake: Any = driver

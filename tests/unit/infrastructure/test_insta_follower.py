@@ -55,21 +55,29 @@ def test_login_raises_when_credentials_missing(monkeypatch: pytest.MonkeyPatch) 
         make_bot(FakeDriver({}), []).login()
 
 
-def test_find_followers_scrolls_the_modal_n_times() -> None:
-    modal, link = FakeElement(), FakeElement()
+def test_find_followers_scrolls_the_scroll_container_n_times() -> None:
+    modal, scroll_container, link = FakeElement(), FakeElement(), FakeElement()
     driver = FakeDriver(
-        {constants.FOLLOWERS_LINK_XPATH: [link], constants.FOLLOWERS_MODAL_XPATH: [modal]}
+        {
+            constants.FOLLOWERS_LINK_XPATH: [link],
+            constants.FOLLOWERS_MODAL_XPATH: [modal],
+            constants.FOLLOWERS_SCROLL_XPATH: [scroll_container],
+        }
     )
     make_bot(driver, []).find_followers()
     expected_url = constants.ACCOUNT_URL_TEMPLATE.format(account=constants.SIMILAR_ACCOUNT)
     assert driver.visited == [expected_url]
     assert link.clicks == 1
-    assert driver.scripts == [(constants.SCROLL_MODAL_SCRIPT, modal)] * constants.SCROLL_COUNT
+    assert (
+        driver.scripts
+        == [(constants.SCROLL_CONTAINER_SCRIPT, scroll_container)] * constants.SCROLL_COUNT
+    )
+    assert all(target is not modal for _, target in driver.scripts)
 
 
 def test_follow_clicks_every_button_with_one_second_delay() -> None:
     buttons = [FakeElement(), FakeElement(), FakeElement()]
-    driver = FakeDriver({constants.FOLLOWERS_MODAL_XPATH: [FakeElement(children=buttons)]})
+    driver = FakeDriver({constants.FOLLOWERS_SCROLL_XPATH: [FakeElement(children=buttons)]})
     sleeps: list[float] = []
     make_bot(driver, sleeps).follow()
     assert [b.clicks for b in buttons] == [1, 1, 1]
@@ -81,7 +89,7 @@ def test_follow_cancels_popup_and_continues_when_click_intercepted() -> None:
     buttons = [FakeElement(), FakeElement(intercepted=True), FakeElement()]
     driver = FakeDriver(
         {
-            constants.FOLLOWERS_MODAL_XPATH: [FakeElement(children=buttons)],
+            constants.FOLLOWERS_SCROLL_XPATH: [FakeElement(children=buttons)],
             constants.CANCEL_BUTTON_XPATH: [cancel],
         }
     )
@@ -122,3 +130,21 @@ def test_context_exit_quits_owned_driver_when_body_raises(
     with pytest.raises(RuntimeError), InstaFollower():
         raise RuntimeError("boom")
     assert driver.quit_calls == 1
+
+
+def test_follow_never_clicks_the_profile_follow_button() -> None:
+    profile_button, row_button = FakeElement(), FakeElement()
+    driver = FakeDriver(
+        {
+            "//profile-follow-button": [profile_button],
+            constants.FOLLOWERS_SCROLL_XPATH: [FakeElement(children=[row_button])],
+        }
+    )
+    make_bot(driver, []).follow()
+    assert profile_button.clicks == 0
+    assert row_button.clicks == 1
+
+
+def test_follow_button_locator_is_relative_and_matches_exact_follow_text() -> None:
+    assert constants.FOLLOW_BUTTON_XPATH.startswith(".//")
+    assert "normalize-space(text())='Follow'" in constants.FOLLOW_BUTTON_XPATH

@@ -81,11 +81,11 @@ class InstaFollower:
         )
         self._driver.find_element(By.XPATH, constants.SUBMIT_BUTTON_XPATH).click()
         self._sleep(constants.PAGE_SETTLE_DELAY)
-        # "Save login info", then notifications: both are "Not now" buttons.
+        # "Save login info", then notifications: both are "Not Now" buttons.
         for _ in range(2):
             self._click_if_present(constants.NOT_NOW_BUTTON_XPATH)
 
-    ## @brief Open the similar account and scroll its followers modal.
+    ## @brief Open the similar account and scroll its followers list.
     def find_followers(self) -> None:
         account_url = constants.ACCOUNT_URL_TEMPLATE.format(account=constants.SIMILAR_ACCOUNT)
         self._driver.get(account_url)
@@ -94,20 +94,21 @@ class InstaFollower:
         wait.until(
             EC.presence_of_element_located((By.XPATH, constants.FOLLOWERS_LINK_XPATH))
         ).click()
-        modal = wait.until(
-            EC.presence_of_element_located((By.XPATH, constants.FOLLOWERS_MODAL_XPATH))
+        wait.until(EC.presence_of_element_located((By.XPATH, constants.FOLLOWERS_MODAL_XPATH)))
+        scroll_container = wait.until(
+            EC.presence_of_element_located((By.XPATH, constants.FOLLOWERS_SCROLL_XPATH))
         )
         for _ in range(constants.SCROLL_COUNT):
-            # Scroll the modal element itself; the page behind it does not scroll.
-            self._driver.execute_script(constants.SCROLL_MODAL_SCRIPT, modal)
+            # The modal has overflow hidden; only the list inside it scrolls.
+            self._driver.execute_script(constants.SCROLL_CONTAINER_SCRIPT, scroll_container)
             self._sleep(constants.SCROLL_DELAY)
 
-    ## @brief Click every Follow button in the followers modal.
+    ## @brief Click every Follow button in the followers list.
     #  An interception means an unfollow confirmation opened (the account is
     #  already followed); its Cancel button is clicked and the loop goes on.
     def follow(self) -> None:
-        modal = self._driver.find_element(By.XPATH, constants.FOLLOWERS_MODAL_XPATH)
-        for button in modal.find_elements(By.XPATH, constants.FOLLOW_BUTTON_XPATH):
+        container = self._driver.find_element(By.XPATH, constants.FOLLOWERS_SCROLL_XPATH)
+        for button in container.find_elements(By.XPATH, constants.FOLLOW_BUTTON_XPATH):
             try:
                 button.click()
             except ElementClickInterceptedException:
