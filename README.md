@@ -23,6 +23,35 @@ The assignment has five steps: get credentials, create the `InstaFollower` class
 
 The bot targets the mock service Share-a-Naan. Running bots against the real Instagram can get an account banned and is not supported.
 
+### Lecture steps
+
+Each step of the assignment, with what the screen looks like on the Share-a-Naan mock. Screenshots were taken on 2026-11-04.
+
+**Step 1 - Get your credentials.** The mock's profile page lists your login (your email is the username) and the target accounts to pick `SIMILAR_ACCOUNT` from. The password is read from the environment and never stored in the repository.
+
+![Target accounts on the Share-a-Naan profile page][img-step1]
+
+**Step 2 - Create a class.** `InstaFollower` creates the Selenium driver in `__init__` and has the three methods `login()`, `find_followers()` and `follow()`.
+
+![Outline of the InstaFollower class][img-step2]
+
+**Step 3 - Log in.** The login page, then two pop-ups that are dismissed with the "Not Now" button, found by its text with `contains()`.
+
+![Share-a-Naan login page][img-step3-login]
+![Save your login info pop-up][img-step3-save]
+![Turn on notifications pop-up][img-step3-notifications]
+
+**Step 4 - Find the followers.** Open `/u/<account>`, click the followers link and scroll the list inside the modal (the `followers-scroll` element), not the page behind it.
+
+![Profile of the target account][img-step4-profile]
+![Followers modal][img-step4-modal]
+![Followers modal scrolled to the end][img-step4-scrolled]
+
+**Step 5 - Follow all the followers.** Click every "Follow" button with a 1 second pause. If a click is intercepted by the "Unfollow?" pop-up (an account that is already followed), click "Cancel" and carry on.
+
+![Unfollow pop-up with a Cancel button][img-step5-unfollow]
+![Followers after the follow loop][img-step5-followed]
+
 ## 📋 Requirements
 
 - Python 3.13 or newer.
@@ -60,7 +89,7 @@ export INSTA_PASSWORD="your_password"
 python -m instagram_followers.presentation.main
 ```
 
-Run it sparingly and log out between test runs by hand.
+Run it sparingly and log out between test runs by hand. The mock has a "Reset Share-a-Naan" button on its profile page that clears your follows for a clean re-run.
 
 ## 🧪 Tests
 
@@ -99,6 +128,16 @@ The documents a newcomer needs, in reading order.
 
 ---
 
+[img-step1]: ./docs/images/step1-target-accounts.jpg
+[img-step2]: ./docs/images/step2-class-outline.png
+[img-step3-login]: ./docs/images/step3-login-page.jpg
+[img-step3-save]: ./docs/images/step3-save-info-popup.jpg
+[img-step3-notifications]: ./docs/images/step3-notifications-popup.jpg
+[img-step4-profile]: ./docs/images/step4-target-profile.jpg
+[img-step4-modal]: ./docs/images/step4-followers-modal.jpg
+[img-step4-scrolled]: ./docs/images/step4-followers-scrolled.jpg
+[img-step5-unfollow]: ./docs/images/step5-unfollow-popup.jpg
+[img-step5-followed]: ./docs/images/step5-followed.jpg
 [license]: ./LICENSE
 [repository]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/052-instagram-followers
 [documentation]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/052-instagram-followers/wiki
